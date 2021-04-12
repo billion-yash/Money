@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:money/DataStructure/TransactionData.dart';
 import 'package:money/Widgets/AddTrasaction.dart';
 import 'package:money/Widgets/MainCard.dart';
@@ -16,6 +18,10 @@ class _MainClassWidgetState extends State<MainClassWidget> {
     final td = TransactionData(title: title, amount: amt);
     setState(() {
       list.add(td);
+      Firestore.instance
+          .collection("path")
+          .document(td.title)
+          .setData({"name": "$amt"});
     });
   }
 
