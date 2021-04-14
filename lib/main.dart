@@ -32,14 +32,16 @@ class MainState extends State<MainClass> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("Money"),
-        ),
-        body: _initialized ? MainClassWidget() : Text("Loding"),
-      ),
-    );
+    return _initialized
+        ? MainClassWidget()
+        : MaterialApp(
+            home: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text("Money"),
+              ),
+              body: Text("Loding"),
+            ),
+          );
   }
 }

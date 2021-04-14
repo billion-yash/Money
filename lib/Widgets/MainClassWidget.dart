@@ -1,9 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:money/DataStructure/TransactionData.dart';
-import 'package:money/Widgets/AddTrasaction.dart';
-import 'package:money/Widgets/MainCard.dart';
 import 'package:flutter/material.dart';
-import 'package:money/Widgets/TrasitionList.dart';
+import './TrasactionPage/AddTrasactionPage.dart';
 
 class MainClassWidget extends StatefulWidget {
   @override
@@ -11,29 +7,55 @@ class MainClassWidget extends StatefulWidget {
 }
 
 class _MainClassWidgetState extends State<MainClassWidget> {
-  final List<TransactionData> list = [];
+  int _selectedIndex = 0;
+  static List<Widget> _widgetOptions = <Widget>[
+    AddTransactionPage(),
+    Text('Search Page',
+        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Profile Page',
+        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+  ];
 
-  void addTransaction(String title, double amt) {
-    final td = TransactionData(title: title, amount: amt);
+  void _onItemTapped(int index) {
     setState(() {
-      list.add(td);
-
-      FirebaseFirestore.instance
-          .collection("path")
-          .doc(td.title)
-          .set({"name": "$amt"});
+      _selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-      children: [
-        MainCard(),
-        AddTrasaction(addTransaction),
-        TrasactionList(list),
-      ],
-    ));
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Money"),
+        ),
+        body: SingleChildScrollView(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: "Transactions",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.login),
+              label: "Login",
+            ),
+          ],
+          elevation: 5,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          iconSize: 30,
+          selectedItemColor: Colors.blue,
+          type: BottomNavigationBarType.fixed,
+        ),
+      ),
+    );
   }
 }
