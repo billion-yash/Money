@@ -9,10 +9,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  User getUser() {
+    User user = FirebaseAuth.instance.currentUser;
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (FirebaseAuth.instance.currentUser == null) {
-      return MainCard();
+    if (getUser() == null) {
+      return MainCard(getUser);
     } else {
       return CurretUser();
     }

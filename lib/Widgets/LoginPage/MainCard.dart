@@ -2,13 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MainCard extends StatefulWidget {
+  Function getUser;
+  MainCard(this.getUser);
   @override
   State<StatefulWidget> createState() {
-    return MainCardState();
+    return MainCardState(getUser);
   }
 }
 
 class MainCardState extends State<MainCard> {
+  Function getUser;
+  MainCardState(this.getUser);
+
   bool isOTPsenT = false;
   String verificationId;
   TextEditingController phoneNumber, otpController;
@@ -25,6 +30,10 @@ class MainCardState extends State<MainCard> {
     FirebaseAuth.instance
         .signInWithCredential(credential)
         .then((value) => print(value.toString()));
+
+    setState(() {
+      getUser();
+    });
   }
 
   Future<void> sentOTP(String phoneNumber) async {
