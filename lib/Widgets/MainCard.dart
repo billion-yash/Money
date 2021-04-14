@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MainCard extends StatefulWidget {
@@ -11,7 +10,15 @@ class MainCard extends StatefulWidget {
 
 class MainCardState extends State<MainCard> {
   void singIn() {}
-  void sentOTP() {}
+  Future<void> sentOTP() async {
+    FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+918668611930 ',
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
