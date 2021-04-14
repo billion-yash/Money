@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:money/Widgets/MainClassWidget.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MainClass());
 }
 
@@ -13,22 +15,31 @@ class MainClass extends StatefulWidget {
 }
 
 class MainState extends State<MainClass> {
+  bool _initialized = false;
+
+  Future<void> initilizeFirebase() async {
+    try {
+      await Firebase.initializeApp();
+      setState(() => _initialized = true);
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    initilizeFirebase();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Money"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            MainClassWidget(),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Money"),
         ),
+        body: _initialized ? MainClassWidget() : Text("Loding"),
       ),
-    )
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class MainCard extends StatefulWidget {
@@ -8,15 +10,23 @@ class MainCard extends StatefulWidget {
 }
 
 class MainCardState extends State<MainCard> {
+  void singIn() {}
+  void sentOTP() {}
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      child: Text("smaple"),
-      color: Colors.amber,
-      height: 180,
-      alignment: Alignment.center,
-      margin: EdgeInsets.all(10),
-    );
+        child: Column(
+      children: [
+        RaisedButton(
+          onPressed: singIn,
+          child: Text("Sign In"),
+        ),
+        RaisedButton(
+          onPressed: sentOTP,
+          child: Text("sent OTP"),
+        ),
+      ],
+    ));
   }
 }
