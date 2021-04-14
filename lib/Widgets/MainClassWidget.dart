@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money/Widgets/LoginPage/LoginPage.dart';
 import './TrasactionPage/AddTrasactionPage.dart';
 
 class MainClassWidget extends StatefulWidget {
@@ -12,8 +13,7 @@ class _MainClassWidgetState extends State<MainClassWidget> {
     AddTransactionPage(),
     Text('Search Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Profile Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    LoginPage(),
   ];
 
   void _onItemTapped(int index) {

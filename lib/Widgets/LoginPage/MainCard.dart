@@ -9,31 +9,88 @@ class MainCard extends StatefulWidget {
 }
 
 class MainCardState extends State<MainCard> {
-  void singIn() {}
-  Future<void> sentOTP() async {
-    FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: '+918668611930 ',
+  bool isOTPsenT = false;
+  String verificationId;
+  TextEditingController phoneNumber, otpController;
+  String otp;
+  void checkPhoneNumberAndSendOTP() {
+    if (phoneNumber.text.length == 10) {
+      sentOTP(phoneNumber.text);
+    }
+  }
+
+  void verifyOTP() {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: otpController.text);
+    FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((value) => print(value.toString()));
+  }
+
+  Future<void> sentOTP(String phoneNumber) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+91" + phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int resendToken) {},
+      codeSent: (String verificationId, int resendToken) {
+        this.verificationId = verificationId;
+        setState(() {
+          isOTPsenT = true;
+        });
+      },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: [
-        RaisedButton(
-          onPressed: singIn,
-          child: Text("Sign In"),
-        ),
-        RaisedButton(
-          onPressed: sentOTP,
-          child: Text("sent OTP"),
-        ),
-      ],
-    ));
+    phoneNumber = TextEditingController();
+    otpController = TextEditingController();
+    return isOTPsenT
+        ? Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                TextField(
+                  controller: phoneNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter phone number',
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: checkPhoneNumberAndSendOTP,
+                  child: Text("sent OTP"),
+                ),
+                TextField(
+                  controller: otpController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter OTP',
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: verifyOTP,
+                  child: Text("verify"),
+                ),
+              ],
+            ))
+        : Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                TextField(
+                  controller: phoneNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter phone number',
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: checkPhoneNumberAndSendOTP,
+                  child: Text("sent OTP"),
+                ),
+              ],
+            ));
   }
 }
