@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:money/LoadingScreen.dart';
 
-import 'Widgets/LoginPage/MainCard.dart';
+import 'Widgets/LoginPage/LoginPage.dart';
 import 'Widgets/MainClassWidget.dart';
 
 void main() {
@@ -18,48 +19,15 @@ class MainClass extends StatefulWidget {
 }
 
 class MainState extends State<MainClass> {
-  bool initialized = false;
-
-  Future<void> initializeFirebase() async {
-    try {
-      await Firebase.initializeApp();
-      setState(() => initialized = true);
-    } catch (e) {}
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initializeFirebase();
-  }
-
   @override
   Widget build(BuildContext context) {
-    MaterialApp materialApp = getApp();
-    return materialApp;
-  }
-
-  void getUser() {
-    setState(() {
-      getApp();
-      getApp();
-    });
-  }
-
-  MaterialApp getApp() {
-    if (FirebaseAuth.instance.currentUser == null) {
-      return MaterialApp(
-          home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("Money"),
-        ),
-        body: MainCard(getUser),
-      ));
-    } else {
-      return MaterialApp(
-        home: MainClassWidget(getUser),
+    return MaterialApp(
+        routes: {
+          '/' : (context) => LoadingScreen(),
+          '/loginPage' : (context) => LoginPage(),
+          '/home' : (context) => MainClassWidget(),
+        },
+        initialRoute: '/',
       );
-    }
   }
 }

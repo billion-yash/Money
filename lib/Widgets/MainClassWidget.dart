@@ -3,18 +3,12 @@ import 'package:money/Widgets/User/CurrentUser.dart';
 import 'TransactionPage/AddTransactionPage.dart';
 
 class MainClassWidget extends StatefulWidget {
-  final Function getUser;
-  MainClassWidget(this.getUser);
   @override
-  _MainClassWidgetState createState() => _MainClassWidgetState(getUser);
+  _MainClassWidgetState createState() => _MainClassWidgetState();
 }
 
 class _MainClassWidgetState extends State<MainClassWidget> {
   int _selectedIndex = 0;
-
-  Function getUser;
-  _MainClassWidgetState(this.getUser);
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -27,7 +21,7 @@ class _MainClassWidgetState extends State<MainClassWidget> {
       AddTransactionPage(),
       Text('Search Page',
           style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-      CurretUser(getUser),
+      CurrentUser(),
     ];
     return Scaffold(
       appBar: AppBar(
