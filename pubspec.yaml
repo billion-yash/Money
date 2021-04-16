@@ -29,10 +29,10 @@ dependencies:
   cloud_firestore: ^1.0.4
   flutter_spinkit: "^4.1.2"
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,3 +70,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "42a5f5"
+  android_disable_fullscreen: true

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget{
@@ -19,24 +20,32 @@ class LoginPageState extends State<LoginPage> {
     }
   }
 
-  void verifyOTP() {
+  void verifyOTP() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otpController.text);
-    FirebaseAuth.instance
-        .signInWithCredential(credential).whenComplete(() => Navigator.pushReplacementNamed(context, '/home'));
 
+    UserCredential user= await FirebaseAuth.instance.signInWithCredential(credential);
+    if(user!=null){
+      Navigator.pushReplacementNamed(context, '/home');
+    }
   }
 
   Future<void> sentOTP(String phoneNumber) async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "+91" + phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int resendToken) {
-        this.verificationId = verificationId;
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
+    if(!kIsWeb){
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: "+91" + phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {},
+        codeSent: (String verificationId, int resendToken) {
+          this.verificationId = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    }
+    else{
+      ConfirmationResult confirmationResult =  await FirebaseAuth.instance.signInWithPhoneNumber("+91" + phoneNumber);
+      this.verificationId = confirmationResult.verificationId;
+    }
   }
 
   @override

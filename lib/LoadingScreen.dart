@@ -10,7 +10,6 @@ class LoadingScreen extends StatelessWidget {
       await Firebase.initializeApp();
     } catch (e) {}
     doneInitializing(context);
-
   }
 
   void doneInitializing(BuildContext context){
