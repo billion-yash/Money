@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:money/DataStructure/TransactionData.dart';
-import 'package:money/Widgets/TrasactionPage/AddTrasaction.dart';
 import 'package:flutter/material.dart';
-import 'package:money/Widgets/TrasactionPage/TrasitionList.dart';
+import 'package:money/Widgets/TransactionPage/TransactionList.dart';
+
+import 'AddTransaction.dart';
 
 class AddTransactionPage extends StatefulWidget {
   @override
@@ -28,8 +29,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AddTrasaction(addTransaction),
-        TrasactionList(list),
+        AddTransaction(addTransaction),
+        TransactionList(list),
       ],
     );
   }

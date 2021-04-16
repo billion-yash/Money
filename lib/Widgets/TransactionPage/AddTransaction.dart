@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class AddTrasaction extends StatelessWidget {
+class AddTransaction extends StatelessWidget {
   final Function added;
-  AddTrasaction(this.added);
+  AddTransaction(this.added);
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
@@ -33,12 +33,11 @@ class AddTrasaction extends StatelessWidget {
               ),
             ),
           ),
-          FlatButton(
+          ElevatedButton(
             onPressed: () {
               added(titleController.text, double.parse(amountController.text));
             },
             child: Text("Add Transaction"),
-            textColor: Colors.blue,
           ),
         ],
       ),

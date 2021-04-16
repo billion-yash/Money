@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:money/DataStructure/TransactionData.dart';
 
-class TrasactionList extends StatelessWidget {
+class TransactionList extends StatelessWidget {
   final List<TransactionData> transactionList;
-  TrasactionList(this.transactionList);
+  TransactionList(this.transactionList);
   @override
   Widget build(BuildContext context) {
     return Container(

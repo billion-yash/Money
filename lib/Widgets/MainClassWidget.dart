@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:money/Widgets/User/CurrentUser.dart';
-import './TrasactionPage/AddTrasactionPage.dart';
+import 'TransactionPage/AddTransactionPage.dart';
 
 class MainClassWidget extends StatefulWidget {
-  Function getUser;
+  final Function getUser;
   MainClassWidget(this.getUser);
   @override
   _MainClassWidgetState createState() => _MainClassWidgetState(getUser);

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class MainCard extends StatefulWidget {
   final Function getUser;
+
   MainCard(this.getUser);
+
   @override
   State<StatefulWidget> createState() {
     return MainCardState(getUser);
@@ -12,25 +14,27 @@ class MainCard extends StatefulWidget {
 
 class MainCardState extends State<MainCard> {
   Function getUser;
+
   MainCardState(this.getUser);
 
-  bool isOTPsenT = false;
+  bool isOTPSent = false;
   String verificationId;
   TextEditingController phoneNumber, otpController;
   String otp;
+
   void checkPhoneNumberAndSendOTP() {
     if (phoneNumber.text.length == 10) {
       sentOTP(phoneNumber.text);
     }
   }
 
-  void verifyOTP() async {
+  void verifyOTP() {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otpController.text);
-    await FirebaseAuth.instance
+    FirebaseAuth.instance
         .signInWithCredential(credential)
         .then((value) => print(value.toString()));
-    return getUser();
+    getUser();
   }
 
   Future<void> sentOTP(String phoneNumber) async {
@@ -41,7 +45,7 @@ class MainCardState extends State<MainCard> {
       codeSent: (String verificationId, int resendToken) {
         this.verificationId = verificationId;
         setState(() {
-          isOTPsenT = true;
+          isOTPSent = true;
         });
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
@@ -52,7 +56,7 @@ class MainCardState extends State<MainCard> {
   Widget build(BuildContext context) {
     phoneNumber = TextEditingController();
     otpController = TextEditingController();
-    return isOTPsenT
+    return isOTPSent
         ? Container(
             margin: EdgeInsets.all(10),
             child: Column(
@@ -64,7 +68,7 @@ class MainCardState extends State<MainCard> {
                     hintText: 'Enter phone number',
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: checkPhoneNumberAndSendOTP,
                   child: Text("sent OTP"),
                 ),
@@ -75,7 +79,7 @@ class MainCardState extends State<MainCard> {
                     hintText: 'Enter OTP',
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: verifyOTP,
                   child: Text("verify"),
                 ),
@@ -92,7 +96,7 @@ class MainCardState extends State<MainCard> {
                     hintText: 'Enter phone number',
                   ),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: checkPhoneNumberAndSendOTP,
                   child: Text("sent OTP"),
                 ),

@@ -20,7 +20,7 @@ class MainClass extends StatefulWidget {
 class MainState extends State<MainClass> {
   bool initialized = false;
 
-  Future<void> initilizeFirebase() async {
+  Future<void> initializeFirebase() async {
     try {
       await Firebase.initializeApp();
       setState(() => initialized = true);
@@ -30,7 +30,7 @@ class MainState extends State<MainClass> {
   @override
   void initState() {
     super.initState();
-    initilizeFirebase();
+    initializeFirebase();
   }
 
   @override
