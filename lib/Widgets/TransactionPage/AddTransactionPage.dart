@@ -32,8 +32,10 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser.phoneNumber)
           .collection("transactions")
-          .doc(td.id.month.toString())
-          .set({td.id.toString() : {"spend" : td.amount , "title" : td.title}} , SetOptions(merge: true));
+          .doc("2021")
+          .collection("4")
+          .doc(td.id.toString())
+          .set({"spend" : td.amount , "title" : td.title} , SetOptions(merge: true));
     });
   }
 
@@ -42,7 +44,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     return Column(
       children: [
         AddTransaction(addTransaction),
-        TransactionList(list),
+        TransactionList(FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser.phoneNumber)
+            .collection("transactions")
+            .doc("2021")
+            .collection("4")),
       ],
     );
   }
