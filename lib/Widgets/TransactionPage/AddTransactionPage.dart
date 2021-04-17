@@ -32,8 +32,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser.phoneNumber)
           .collection("transactions")
-          .doc("2021")
-          .collection("4")
+          .doc(td.id.year.toString())
+          .collection(td.id.month.toString())
           .doc(td.id.toString())
           .set({"spend" : td.amount , "title" : td.title} , SetOptions(merge: true));
     });
@@ -48,8 +48,8 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             .collection("users")
             .doc(FirebaseAuth.instance.currentUser.phoneNumber)
             .collection("transactions")
-            .doc("2021")
-            .collection("4")),
+            .doc(DateTime.now().year.toString())
+            .collection(DateTime.now().month.toString())),
       ],
     );
   }

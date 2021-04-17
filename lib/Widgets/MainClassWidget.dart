@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money/Widgets/SummaryPage/SummaryPage.dart';
 import 'package:money/Widgets/User/CurrentUser.dart';
 import 'TransactionPage/AddTransactionPage.dart';
 
@@ -21,8 +22,7 @@ class _MainClassWidgetState extends State<MainClassWidget> {
 
     List<Widget> _widgetOptions = <Widget>[
       AddTransactionPage(),
-      Text('Search Page',
-          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+      SummaryPage(),
       CurrentUser(),
     ];
 
