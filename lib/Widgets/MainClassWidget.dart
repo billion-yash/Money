@@ -17,12 +17,16 @@ class _MainClassWidgetState extends State<MainClassWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+
     List<Widget> _widgetOptions = <Widget>[
       AddTransactionPage(),
       Text('Search Page',
           style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
       CurrentUser(),
     ];
+
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
