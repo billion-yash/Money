@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:money/LoadingScreen.dart';
 
 import 'Widgets/LoginPage/LoginPage.dart';
@@ -23,6 +24,7 @@ class MainState extends State<MainClass> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        builder:EasyLoading.init(),
         routes: {
           '/' : (context) => LoadingScreen(),
           '/loginPage' : (context) => LoginPage(),

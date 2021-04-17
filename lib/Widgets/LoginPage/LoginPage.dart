@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -15,18 +16,36 @@ class LoginPageState extends State<LoginPage> {
   String otp;
 
   void checkPhoneNumberAndSendOTP() {
+    EasyLoading.instance
+      ..indicatorType = EasyLoadingIndicatorType.fadingCube;
     if (phoneNumber.text.length == 10) {
+      EasyLoading.show(status: 'Sending OTP...',);
       sentOTP(phoneNumber.text);
+    }
+    else{
+      EasyLoading.showError('Enter Valid Number', );
     }
   }
 
   void verifyOTP() async {
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: otpController.text);
+    if(verificationId == null || otpController.text == ""){
+      EasyLoading.showError('invalid OTP',);
+    }
+    else {
+      EasyLoading.show(
+        status: 'Please Wait...',
+      );
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: otpController.text);
 
-    UserCredential user= await FirebaseAuth.instance.signInWithCredential(credential);
-    if(user!=null){
-      Navigator.pushReplacementNamed(context, '/home');
+      UserCredential user =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      if(user!=null){
+        EasyLoading.showToast("Logged in successfully." , toastPosition: EasyLoadingToastPosition.bottom);
+        Navigator.pushReplacementNamed(context, '/home');
+      }else{
+        EasyLoading.showError("Enter valid OTP");
+      }
     }
   }
 
@@ -34,9 +53,14 @@ class LoginPageState extends State<LoginPage> {
     if(!kIsWeb){
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: "+91" + phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {},
+        verificationCompleted: (PhoneAuthCredential credential) {
+
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          EasyLoading.showToast("something went wrong!" , toastPosition: EasyLoadingToastPosition.bottom);
+        },
         codeSent: (String verificationId, int resendToken) {
+          EasyLoading.showSuccess('OTP sent!');
           this.verificationId = verificationId;
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
@@ -44,7 +68,13 @@ class LoginPageState extends State<LoginPage> {
     }
     else{
       ConfirmationResult confirmationResult =  await FirebaseAuth.instance.signInWithPhoneNumber("+91" + phoneNumber);
-      this.verificationId = confirmationResult.verificationId;
+      if(confirmationResult.verificationId != null){
+        this.verificationId = confirmationResult.verificationId;
+        EasyLoading.showSuccess('OTP sent!');
+      }
+      else{
+        EasyLoading.showToast("something went wrong!" , toastPosition: EasyLoadingToastPosition.bottom);
+      }
     }
   }
 
@@ -60,6 +90,9 @@ class LoginPageState extends State<LoginPage> {
             children: [
               TextField(
                 controller: phoneNumber,
+                keyboardType: TextInputType.number,
+                autofocus: true,
+                maxLength: 10,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter phone number',
@@ -71,6 +104,9 @@ class LoginPageState extends State<LoginPage> {
               ),
               TextField(
                 controller: otpController,
+                autofocus: true,
+                maxLength: 6,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Enter OTP',
