@@ -2,24 +2,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:money/Design/mColors.dart';
 
 class LoadingScreen extends StatelessWidget {
-
   Future<void> initializeFirebase(BuildContext context) async {
     try {
       await Firebase.initializeApp();
     } catch (e) {}
+    await Future.delayed(Duration(milliseconds: 1950), () {});
     doneInitializing(context);
   }
 
-  void doneInitializing(BuildContext context){
-    if(FirebaseAuth.instance.currentUser != null){
+  void doneInitializing(BuildContext context) {
+    if (FirebaseAuth.instance.currentUser != null) {
       Navigator.pushReplacementNamed(context, "/home");
-    }else{
+    } else {
       Navigator.pushReplacementNamed(context, "/loginPage");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,39 @@ class LoadingScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        color: Colors.blue,
-        child: SpinKitRotatingCircle(
-          color: Colors.white,
-          size: 50.0,
+        color: mColors.primaryColor,
+        child: Stack(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/icon/appicon.png',
+                height: 120,
+                width: 120,
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SpinKitPouringHourglass(
+                  color: mColors.secondaryColor,
+                  duration: Duration(milliseconds: 2000),
+                  size: 40.0,
+                ),
+                Container(
+                  child: Text(
+                    "YD",
+                    style: TextStyle(
+                        color: mColors.secondaryColor,
+                        fontSize: 25,
+                        letterSpacing: 7,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  margin: EdgeInsets.all(15),
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
