@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:money/Widgets/TransactionPage/UpdatePocket.dart';
 
 import '../../Design/mColors.dart';
 
@@ -49,7 +50,7 @@ class TransactionWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(icon: Icon(Icons.delete ,color: Colors.red,), onPressed: ()=>deleteTransaction(doc.id)),
+              IconButton(icon: Icon(Icons.delete ,color: Colors.red,), onPressed: ()=>deleteTransaction(doc.id ,doc)),
             ],
           ),
       ),
@@ -65,7 +66,8 @@ class TransactionWidget extends StatelessWidget {
     return Colors.green;
   }
 
-  void deleteTransaction(String id) {
+  void deleteTransaction(String id ,DocumentSnapshot documentSnapshot) {
     collectionReference.doc(id).delete();
-  }
+    UpdatePocket.deleteTransaction(documentSnapshot);
+    }
 }

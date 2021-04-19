@@ -13,6 +13,8 @@ class CurrentUser extends StatelessWidget {
         child: Text("Sign Out"),
       ),
       Text(FirebaseAuth.instance.currentUser.phoneNumber),
+      ElevatedButton(onPressed: () => Navigator.pushNamed(context, '/home/year'),),
+
     ]);
   }
 }

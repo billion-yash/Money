@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:money/Design/mColors.dart';
+import 'package:money/Widgets/TransactionPage/UpdatePocket.dart';
 
 class AddTransaction extends StatefulWidget {
-  final Function added;
+  final Function AddTransactionToDatabase;
 
-  AddTransaction(this.added);
+  AddTransaction(this.AddTransactionToDatabase);
 
   @override
-  _AddTransactionState createState() => _AddTransactionState(added);
+  _AddTransactionState createState() => _AddTransactionState(AddTransactionToDatabase);
 }
 
 class _AddTransactionState extends State<AddTransaction> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-  final Function added;
+  final Function addTransactionToDatabase;
 
-  _AddTransactionState(this.added);
+  _AddTransactionState(this.addTransactionToDatabase);
 
   int radioValue = 1;
 
@@ -96,7 +97,7 @@ class _AddTransactionState extends State<AddTransaction> {
             margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             child: ElevatedButton(
               onPressed: () {
-                added(
+                UpdatePocket.addTransactionPocket(
                     titleController.text, double.parse(amountController.text)*radioValue);
               },
               style: ButtonStyle(

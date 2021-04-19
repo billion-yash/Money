@@ -12,12 +12,8 @@ class AddTransactionPage extends StatefulWidget {
 }
 
 class _AddTransactionPageState extends State<AddTransactionPage> {
-  final List<TransactionData> list = [];
-
   void addTransaction(String title, double amt) {
     final td = TransactionData(title: title, amount: amt , id: DateTime.now());
-    setState(() {
-      list.add(td);
       FirebaseFirestore.instance
           .collection("users")
           .doc(FirebaseAuth.instance.currentUser.phoneNumber)
@@ -33,7 +29,6 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           .collection(td.id.month.toString())
           .doc(td.id.toString())
           .set({"spend" : td.amount , "title" : td.title} , SetOptions(merge: true));
-    });
   }
 
   @override

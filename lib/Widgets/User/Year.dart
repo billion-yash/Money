@@ -22,7 +22,13 @@ class Year extends StatelessWidget {
                 final List<DocumentSnapshot> documents = snapshot.data.docs;
                 return ListView(
                     children: documents
-                        .map((doc) => ElevatedButton(onPressed: () { Navigator.pushNamed(context, '/home/year/month'  ,arguments: {"year" :doc.id});} ,child: Text(doc.id),))
+                        .map((doc) => ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/home/year/month',
+                                    arguments: {"year": doc.id});
+                              },
+                              child: Text(doc.id),
+                            ))
                         .toList());
               } else if (snapshot.hasError) {
                 return Text("It's Error!");

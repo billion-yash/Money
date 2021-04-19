@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:money/Design/mColors.dart';
 import 'package:money/LoadingScreen.dart';
-import 'package:money/Widgets/SummaryPage/showHistory.dart';
 
 import 'Widgets/LoginPage/LoginPage.dart';
 import 'Widgets/MainClassWidget.dart';
-import 'Widgets/SummaryPage/Month.dart';
-import 'Widgets/SummaryPage/Year.dart';
+import 'Widgets/User/Month.dart';
+import 'Widgets/User/Year.dart';
+import 'Widgets/User/showHistory.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

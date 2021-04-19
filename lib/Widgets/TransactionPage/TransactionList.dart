@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:money/DataStructure/TransactionData.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money/Design/mColors.dart';
 
 import 'TransactionHistoryWidget.dart';
 
 class TransactionList extends StatelessWidget {
   final CollectionReference collectionReference;
+
   TransactionList(this.collectionReference);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.width*0.95,
+      height: MediaQuery.of(context).size.width * 0.95,
       child: StreamBuilder<QuerySnapshot>(
           stream: collectionReference.snapshots(),
           builder: (context, snapshot) {
@@ -19,13 +21,15 @@ class TransactionList extends StatelessWidget {
               final List<DocumentSnapshot> documents = snapshot.data.docs;
               return ListView(
                   children: documents
-                      .map((doc) => TransactionWidget(doc , collectionReference))
+                      .map((doc) => TransactionWidget(doc, collectionReference))
                       .toList());
             } else if (snapshot.hasError) {
-              return Text("It's Error!");
-              }
-            return Text("data");
-              }),
+              return Text("Something went wrong!");
+            }
+            return SpinKitDoubleBounce(
+              color: mColors.secondaryColor,
+            );
+          }),
     );
   }
 }
