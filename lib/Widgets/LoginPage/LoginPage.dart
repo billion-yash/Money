@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money/Design/mColors.dart';
@@ -14,17 +14,20 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   String verificationId;
-  TextEditingController phoneNumber, otpController;
   String otp;
-
-
+  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController otpController = TextEditingController();
   void checkPhoneNumberAndSendOTP() {
-    EasyLoading.instance..backgroundColor = mColors.maskColor..maskColor = mColors.maskColor;
+    EasyLoading.instance
+      ..backgroundColor = mColors.maskColor
+      ..maskColor = mColors.maskColor;
     if (phoneNumber.text.length == 10) {
       EasyLoading.show(
-        status: 'Sending OTP...', maskType: EasyLoadingMaskType.custom ,
-        indicator: SpinKitFadingCube(color: mColors.secondaryColor,size: 50.0)
-      );
+          status: 'Sending OTP...',
+          maskType: EasyLoadingMaskType.custom,
+          indicator:
+              SpinKitFadingCube(color: mColors.secondaryColor, size: 50.0),
+          dismissOnTap: true);
       sentOTP(phoneNumber.text);
     } else {
       EasyLoading.showError(
@@ -84,90 +87,120 @@ class LoginPageState extends State<LoginPage> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
 
-    phoneNumber = TextEditingController();
-    otpController = TextEditingController();
     return Scaffold(
-        backgroundColor: mColors.primaryColor,
-        body: SafeArea(
-          child: Container(
-              margin: EdgeInsets.all(10),
-              child: Container(
-                padding: EdgeInsets.all(25),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextField(
-                      style: TextStyle(
-                        fontSize: 20,
-                        letterSpacing: 10,
-                        color: mColors.secondaryLightColor,
-                      ),
-                      controller: phoneNumber,
-                      keyboardType: TextInputType.number,
-                      maxLength: 10,
-                      cursorColor: mColors.secondaryLightColor,
-                      decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                      ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: mColors.primaryColor,
+      body: SafeArea(
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  new TextFormField(
+                    style: TextStyle(
+                      fontSize: 20,
+                      letterSpacing: 10,
+                      color: mColors.secondaryLightColor,
                     ),
-                    TextField(
-                      style: TextStyle(
-                        fontSize: 20,
-                        letterSpacing: 10,
-
-                        color: mColors.secondaryLightColor,
-                      ),
-                      controller: otpController,
-                      maxLength: 6,
-                      keyboardType: TextInputType.number,
-                      cursorColor: mColors.secondaryLightColor,
-                      decoration: InputDecoration(
-                        labelText: 'OTP',
-                      ),
+                    controller: phoneNumber,
+                    keyboardType: TextInputType.number,
+                    maxLength: 10,
+                    cursorColor: mColors.secondaryLightColor,
+                    decoration: InputDecoration(
+                      labelText: 'Phone Number',
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width*0.7,
-                      child: ElevatedButton(
-                        style:  ButtonStyle(
-                            shadowColor: MaterialStateProperty.all<Color>(mColors.secondaryDarkColor),
-                            elevation: MaterialStateProperty.all<double>(7),
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(15)),
-                            backgroundColor: MaterialStateProperty.all<Color>(mColors.secondaryColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                )
-                            )
-                        ),
-                        onPressed: checkPhoneNumberAndSendOTP,
-                        child: Text("SEND OTP"),
-                      ),
+                  ),
+                  TextField(
+                    style: TextStyle(
+                      fontSize: 20,
+                      letterSpacing: 10,
+                      color: mColors.secondaryLightColor,
                     ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      width: MediaQuery.of(context).size.width*0.7,
-                      child: ElevatedButton(
-                        style:  ButtonStyle(
-                            elevation: MaterialStateProperty.all<double>(7),
-                            shadowColor: MaterialStateProperty.all<Color>(mColors.secondaryDarkColor),
-                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(15)),
-                            backgroundColor: MaterialStateProperty.all<Color>(mColors.secondaryColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                )
-                            )
-                        ),
-                        onPressed: verifyOTP,
-                        child: Text("VERIFY"),
-                      ),
-                    )
-                  ],
-                ),
-              )),
-        ));
+                    controller: otpController,
+                    maxLength: 6,
+                    keyboardType: TextInputType.number,
+                    cursorColor: mColors.secondaryLightColor,
+                    decoration: InputDecoration(
+                      labelText: 'OTP',
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shadowColor: MaterialStateProperty.all<Color>(
+                              mColors.secondaryDarkColor),
+                          elevation: MaterialStateProperty.all<double>(7),
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                  EdgeInsets.all(15)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              mColors.secondaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
+                      onPressed: checkPhoneNumberAndSendOTP,
+                      child: Text("SEND OTP"),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(7),
+                          shadowColor: MaterialStateProperty.all<Color>(
+                              mColors.secondaryDarkColor),
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                  EdgeInsets.all(15)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              mColors.secondaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
+                      onPressed: verifyOTP,
+                      child: Text("VERIFY"),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(25, 50, 50, 20),
+              child: Text(
+                "Beware of little expenses. A small leak will sink a great ship.",
+                style: TextStyle(
+                    fontFamily: 'Righteous',
+                    fontSize: 35,
+                    color: Colors.white70,
+                    letterSpacing: 4),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              margin: EdgeInsets.fromLTRB(10 , 5 , 30 , 10),
+              child: Text(
+                "-Benjamin Franklin",
+                style: TextStyle(
+                    fontFamily: 'Righteous',
+                    fontSize: 15,
+                    color: Colors.white70,),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

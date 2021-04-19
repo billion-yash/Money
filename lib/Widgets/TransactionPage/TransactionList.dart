@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:money/DataStructure/TransactionData.dart';
+import 'package:money/Design/mColors.dart';
+
+import 'TransactionHistoryWidget.dart';
 
 class TransactionList extends StatelessWidget {
   final CollectionReference transactionList;
@@ -16,12 +19,7 @@ class TransactionList extends StatelessWidget {
               final List<DocumentSnapshot> documents = snapshot.data.docs;
               return ListView(
                   children: documents
-                      .map((doc) => Card(
-                    child: ListTile(
-                      title: Text(doc["title"]),
-                      subtitle: Text(doc["spend"].toString()),
-                    ),
-                  ))
+                      .map((doc) => TransactionWidget(doc))
                       .toList());
             } else if (snapshot.hasError) {
               return Text("It's Error!");

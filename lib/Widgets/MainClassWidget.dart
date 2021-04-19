@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money/Design/mColors.dart';
 import 'package:money/Widgets/SummaryPage/SummaryPage.dart';
 import 'package:money/Widgets/User/CurrentUser.dart';
 import 'TransactionPage/AddTransactionPage.dart';
@@ -26,23 +27,29 @@ class _MainClassWidgetState extends State<MainClassWidget> {
       CurrentUser(),
     ];
 
-
     return Scaffold(
+      backgroundColor: mColors.primaryColor,
+
       appBar: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: mColors.primaryDarkColor,
         centerTitle: true,
-        title: Text("Money"),
+        title: Text("Money", style: TextStyle(color: mColors.secondaryColor,fontFamily: 'Righteous' , fontSize: 25 , letterSpacing: 5)),
       ),
       body: SingleChildScrollView(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: mColors.primaryDarkColor,
+        unselectedItemColor: Colors.white70,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: "Transactions",
+            backgroundColor: mColors.secondaryColor
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.poll_outlined),
             label: "Home",
           ),
           BottomNavigationBarItem(
@@ -54,7 +61,7 @@ class _MainClassWidgetState extends State<MainClassWidget> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         iconSize: 30,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: mColors.secondaryColor,
         type: BottomNavigationBarType.fixed,
       ),
     );

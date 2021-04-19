@@ -43,7 +43,7 @@ class LoadingScreen extends StatelessWidget {
               children: [
                 SpinKitPouringHourglass(
                   color: mColors.secondaryColor,
-                  duration: Duration(milliseconds: 2000),
+                  duration: Duration(milliseconds: 700),
                   size: 40.0,
                 ),
                 Container(

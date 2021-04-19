@@ -27,6 +27,7 @@ class MainState extends State<MainClass> {
 
     return MaterialApp(
       theme: ThemeData(
+
           inputDecorationTheme: InputDecorationTheme(
               labelStyle: TextStyle(color: mColors.primaryTextColor , fontSize: 15 , letterSpacing: 4),
               focusedBorder: UnderlineInputBorder(
