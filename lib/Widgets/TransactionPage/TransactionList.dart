@@ -6,20 +6,20 @@ import 'package:money/Design/mColors.dart';
 import 'TransactionHistoryWidget.dart';
 
 class TransactionList extends StatelessWidget {
-  final CollectionReference transactionList;
-  TransactionList(this.transactionList);
+  final CollectionReference collectionReference;
+  TransactionList(this.collectionReference);
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 380,
+      height: MediaQuery.of(context).size.width*0.95,
       child: StreamBuilder<QuerySnapshot>(
-          stream: transactionList.snapshots(),
+          stream: collectionReference.snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final List<DocumentSnapshot> documents = snapshot.data.docs;
               return ListView(
                   children: documents
-                      .map((doc) => TransactionWidget(doc))
+                      .map((doc) => TransactionWidget(doc , collectionReference))
                       .toList());
             } else if (snapshot.hasError) {
               return Text("It's Error!");

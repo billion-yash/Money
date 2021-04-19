@@ -29,12 +29,11 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     return Card(
       color: mColors.primaryDarkColor,
-      margin: EdgeInsets.symmetric(horizontal: 10 , vertical: 20),
+      margin: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
-
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: TextFormField(
               cursorColor: mColors.secondaryColor,
