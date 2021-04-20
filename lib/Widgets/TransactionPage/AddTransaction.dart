@@ -79,7 +79,7 @@ class _AddTransactionState extends State<AddTransaction> {
                     fontSize: 16.0),
               ),
               new Radio(
-                fillColor: MaterialStateProperty.all<Color>(Colors.red),
+                fillColor : MaterialStateProperty.all<Color>(Colors.red),
                 value: -1,
                 groupValue: radioValue,
                 onChanged: _handleRadioValueChange,
