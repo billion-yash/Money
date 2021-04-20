@@ -3,12 +3,12 @@ import 'package:money/Design/mColors.dart';
 import 'package:money/Widgets/TransactionPage/UpdatePocket.dart';
 
 class AddTransaction extends StatefulWidget {
-  final Function AddTransactionToDatabase;
+  final Function addTransactionToDatabase;
 
-  AddTransaction(this.AddTransactionToDatabase);
+  AddTransaction(this.addTransactionToDatabase);
 
   @override
-  _AddTransactionState createState() => _AddTransactionState(AddTransactionToDatabase);
+  _AddTransactionState createState() => _AddTransactionState(addTransactionToDatabase);
 }
 
 class _AddTransactionState extends State<AddTransaction> {
@@ -67,7 +67,7 @@ class _AddTransactionState extends State<AddTransaction> {
               child: Row(
             children: [
               new Radio(
-                activeColor: Colors.green,
+                fillColor: MaterialStateProperty.all<Color>(Colors.green),
                 value: 1,
                 groupValue: radioValue,
                 onChanged: _handleRadioValueChange,
@@ -79,7 +79,7 @@ class _AddTransactionState extends State<AddTransaction> {
                     fontSize: 16.0),
               ),
               new Radio(
-                activeColor: Colors.red,
+                fillColor: MaterialStateProperty.all<Color>(Colors.red),
                 value: -1,
                 groupValue: radioValue,
                 onChanged: _handleRadioValueChange,

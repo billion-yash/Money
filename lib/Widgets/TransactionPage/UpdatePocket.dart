@@ -40,12 +40,14 @@ class UpdatePocket {
         .doc("overall")
         .set({"spend" : FieldValue.increment(amt.toInt())} , SetOptions(merge: true));
 
-    FirebaseFirestore.instance
+    DocumentReference documentReference = FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser.phoneNumber)
         .collection("transactions")
-        .doc(td.id.year.toString())
-        .collection(td.id.month.toString() + "summary")
+        .doc(td.id.year.toString());
+    documentReference.set({});
+
+        documentReference.collection(td.id.month.toString() + "summary")
         .doc("summary")
         .set({"spend" : FieldValue.increment(amt.toInt())} , SetOptions(merge: true));
    }
@@ -58,12 +60,14 @@ class UpdatePocket {
          .doc("overall")
          .set({"earn" : FieldValue.increment(amt.toInt())} , SetOptions(merge: true));
 
-     FirebaseFirestore.instance
+     DocumentReference documentReference = FirebaseFirestore.instance
          .collection("users")
          .doc(FirebaseAuth.instance.currentUser.phoneNumber)
          .collection("transactions")
-         .doc(td.id.year.toString())
-         .collection(td.id.month.toString() + "summary")
+         .doc(td.id.year.toString());
+
+     documentReference..set({});
+         documentReference.collection(td.id.month.toString() + "summary")
          .doc("summary")
          .set({"earn" : FieldValue.increment(amt.toInt())} , SetOptions(merge: true));
    }

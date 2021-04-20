@@ -10,6 +10,7 @@ class UserData{
 
   static UserData getUser(){
     if(user == null ){
+      // ignore: unnecessary_statements
       user == new UserData();
     }
     return user;

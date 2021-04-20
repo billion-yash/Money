@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money/Design/mColors.dart';
 
 class SummaryPage extends StatefulWidget {
@@ -7,8 +10,41 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
+  DocumentSnapshot monthly ,yearly;
+
   @override
   Widget build(BuildContext context) {
+    monthlyData().then((value) {
+      if (monthly == null) {
+        setState(() {
+          monthly = value;
+        });
+      }
+    });
+    yearlyData().then((value) {
+      if (yearly == null) {
+        setState(() {
+          yearly = value;
+        });
+      }
+    });
+    if(monthly == null || yearly == null){
+      return Container(
+        alignment: Alignment.center,
+        height:  MediaQuery.of(context).size.height*0.9,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SpinKitDoubleBounce(
+              color: mColors.secondaryColor,
+            ),
+            SizedBox(height: 15,),
+            Text("Add transaction data from +" , style: TextStyle(fontSize: 20 , color: Colors.white54),)
+          ],
+        )
+      );
+    }
+
     return Container(
         child: Column(
       children: [
@@ -17,7 +53,7 @@ class _SummaryPageState extends State<SummaryPage> {
           color: mColors.primaryDarkColor,
           child: Container(
             padding: EdgeInsets.all(15),
-            width: MediaQuery.of(context).size.width*0.9,
+            width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.35,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,7 +80,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        getDataFromMonthly('spend').toString(),
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.red,
@@ -67,7 +103,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        getDataFromMonthly('earn').toString(),
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.green,
@@ -90,7 +126,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        (getDataFromMonthly('earn')-getDataFromMonthly('spend')).toString(),
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.green,
@@ -110,7 +146,7 @@ class _SummaryPageState extends State<SummaryPage> {
           color: mColors.primaryDarkColor,
           child: Container(
             padding: EdgeInsets.all(15),
-            width: MediaQuery.of(context).size.width*0.9,
+            width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.35,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -137,7 +173,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        getDataFromYearly('spend').toString() + " Rs",
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.red,
@@ -160,7 +196,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        getDataFromYearly('earn').toString() + " Rs",
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.green,
@@ -183,7 +219,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         ),
                       ),
                       Text(
-                        "200000" + " Rs",
+                        (getDataFromYearly('earn') - getDataFromYearly('spend')).toString() + " Rs",
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.green,
@@ -200,5 +236,45 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
       ],
     ));
+  }
+   Future<DocumentSnapshot> monthlyData() async{
+    DocumentSnapshot d =   await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.phoneNumber)
+        .collection("transactions")
+        .doc(DateTime.now().year.toString())
+        .collection(DateTime.now().month.toString() + "summary")
+        .doc("summary")
+        .get().catchError((onError) {return null;});
+    if(d.exists){
+      return d;
+    }
+    return null;
+  }
+  Future<DocumentSnapshot> yearlyData() async{
+    DocumentSnapshot d  =  await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.phoneNumber)
+        .collection("total")
+        .doc("overall")
+        .get().catchError((onError) {return null;});
+    if(d.exists){
+      return d;
+    }
+    return null;}
+
+  int getDataFromMonthly(String s) {
+    try{
+      return monthly[s];
+    }catch(error){
+      return 0;
+    }
+  }
+  int getDataFromYearly(String s) {
+    try{
+      return monthly[s];
+    }catch(error){
+      return 0;
+    }
   }
 }
