@@ -95,112 +95,252 @@ class LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: mColors.primaryColor,
       body: SafeArea(
-        child: ListView(
-          children: [
-            Container(
-              padding: EdgeInsets.all(25),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  new TextFormField(
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 10,
-                      color: mColors.secondaryLightColor,
-                    ),
-                    controller: phoneNumber,
-                    keyboardType: TextInputType.number,
-                    maxLength: 10,
-                    cursorColor: mColors.secondaryLightColor,
-                    decoration: InputDecoration(
-                      labelText: 'Phone Number',
-                    ),
-                  ),
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 10,
-                      color: mColors.secondaryLightColor,
-                    ),
-                    controller: otpController,
-                    maxLength: 6,
-                    keyboardType: TextInputType.number,
-                    cursorColor: mColors.secondaryLightColor,
-                    decoration: InputDecoration(
-                      labelText: 'OTP',
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shadowColor: MaterialStateProperty.all<Color>(
-                              mColors.secondaryDarkColor),
-                          elevation: MaterialStateProperty.all<double>(7),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                  EdgeInsets.all(15)),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              mColors.secondaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ))),
-                      onPressed: checkPhoneNumberAndSendOTP,
-                      child: Text("SEND OTP"),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(7),
-                          shadowColor: MaterialStateProperty.all<Color>(
-                              mColors.secondaryDarkColor),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                  EdgeInsets.all(15)),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              mColors.secondaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ))),
-                      onPressed: verifyOTP,
-                      child: Text("VERIFY"),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 50, 50, 20),
-              child: Text(
-                "Beware of little expenses. A small leak will sink a great ship.",
-                style: TextStyle(
-                    fontFamily: 'Righteous',
-                    fontSize: 35,
-                    color: Colors.white70,
-                    letterSpacing: 4),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.fromLTRB(10 , 5 , 30 , 10),
-              child: Text(
-                "-Benjamin Franklin",
-                style: TextStyle(
-                    fontFamily: 'Righteous',
-                    fontSize: 15,
-                    color: Colors.white70,),
-              ),
-            )
-          ],
-        ),
+        child: isPortrait(context)? portraitWidget() : landscapeWidget(),
       ),
     );
   }
+
+
+  static bool isPortrait(context) {
+    if(MediaQuery.of(context).orientation == Orientation.portrait){
+      return true;
+    }
+    return false;
+  }
+
+  landscapeWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height*0.9,
+          width: MediaQuery.of(context).size.width*0.4,
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(25, 50, 50, 20),
+                child: Text(
+                  "Beware of little expenses. A small leak will sink a great ship.",
+                  style: TextStyle(
+                      fontFamily: 'Righteous',
+                      fontSize: 30,
+                      color: Colors.white70,
+                      letterSpacing: 4),
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.fromLTRB(10 , 5 , 30 , 10),
+                child: Text(
+                  "-Benjamin Franklin",
+                  style: TextStyle(
+                    fontFamily: 'Righteous',
+                    fontSize: 15,
+                    color: Colors.white70,),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width*0.4,
+          height: MediaQuery.of(context).size.height*0.9,
+          alignment: Alignment.centerRight,
+          child: Container(
+            padding: EdgeInsets.all(25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new TextFormField(
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 10,
+                    color: mColors.secondaryLightColor,
+                  ),
+                  controller: phoneNumber,
+                  keyboardType: TextInputType.number,
+                  maxLength: 10,
+                  cursorColor: mColors.secondaryLightColor,
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                  ),
+                ),
+                new TextFormField(
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 10,
+                    color: mColors.secondaryLightColor,
+                  ),
+                  controller: otpController,
+                  maxLength: 6,
+                  keyboardType: TextInputType.number,
+                  cursorColor: mColors.secondaryLightColor,
+                  decoration: InputDecoration(
+                    labelText: 'OTP',
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            mColors.secondaryDarkColor),
+                        elevation: MaterialStateProperty.all<double>(7),
+                        padding:
+                        MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            EdgeInsets.all(15)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            mColors.secondaryColor),
+                        shape:
+                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ))),
+                    onPressed: checkPhoneNumberAndSendOTP,
+                    child: Text("SEND OTP"),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all<double>(7),
+                        shadowColor: MaterialStateProperty.all<Color>(
+                            mColors.secondaryDarkColor),
+                        padding:
+                        MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            EdgeInsets.all(15)),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            mColors.secondaryColor),
+                        shape:
+                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ))),
+                    onPressed: verifyOTP,
+                    child: Text("VERIFY"),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  portraitWidget() {
+    return ListView(
+      children: [
+        Container(
+          padding: EdgeInsets.all(25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              new TextFormField(
+                style: TextStyle(
+                  fontSize: 20,
+                  letterSpacing: 10,
+                  color: mColors.secondaryLightColor,
+                ),
+                controller: phoneNumber,
+                keyboardType: TextInputType.number,
+                maxLength: 10,
+                cursorColor: mColors.secondaryLightColor,
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                ),
+              ),
+              new TextFormField(
+                style: TextStyle(
+                  fontSize: 20,
+                  letterSpacing: 10,
+                  color: mColors.secondaryLightColor,
+                ),
+                controller: otpController,
+                maxLength: 6,
+                keyboardType: TextInputType.number,
+                cursorColor: mColors.secondaryLightColor,
+                decoration: InputDecoration(
+                  labelText: 'OTP',
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      shadowColor: MaterialStateProperty.all<Color>(
+                          mColors.secondaryDarkColor),
+                      elevation: MaterialStateProperty.all<double>(7),
+                      padding:
+                      MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.all(15)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          mColors.secondaryColor),
+                      shape:
+                      MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
+                  onPressed: checkPhoneNumberAndSendOTP,
+                  child: Text("SEND OTP"),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      elevation: MaterialStateProperty.all<double>(7),
+                      shadowColor: MaterialStateProperty.all<Color>(
+                          mColors.secondaryDarkColor),
+                      padding:
+                      MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          EdgeInsets.all(15)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          mColors.secondaryColor),
+                      shape:
+                      MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ))),
+                  onPressed: verifyOTP,
+                  child: Text("VERIFY"),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(25, 50, 50, 20),
+          child: Text(
+            "Beware of little expenses. A small leak will sink a great ship.",
+            style: TextStyle(
+                fontFamily: 'Righteous',
+                fontSize: 35,
+                color: Colors.white70,
+                letterSpacing: 4),
+          ),
+        ),
+        Container(
+          alignment: Alignment.centerRight,
+          margin: EdgeInsets.fromLTRB(10 , 5 , 30 , 10),
+          child: Text(
+            "-Benjamin Franklin",
+            style: TextStyle(
+              fontFamily: 'Righteous',
+              fontSize: 15,
+              color: Colors.white70,),
+          ),
+        )
+      ],
+    );
+  }
+
 }

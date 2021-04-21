@@ -45,198 +45,401 @@ class _SummaryPageState extends State<SummaryPage> {
       );
     }
 
+    return isPortrait(context)? portraitWidget() : landscapeWidget();
+  }
+
+  Widget portraitWidget(){
     return Container(
         child: Column(
-      children: [
-        Card(
-          margin: EdgeInsets.all(20),
-          color: mColors.primaryDarkColor,
-          child: Container(
-            padding: EdgeInsets.all(15),
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.height * 0.35,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Monthly",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'Righteous',
-                    color: mColors.secondaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total spending",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+          children: [
+            Card(
+              margin: EdgeInsets.all(20),
+              color: mColors.primaryDarkColor,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.35,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Monthly",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Righteous',
+                        color: mColors.secondaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        getDataFromMonthly('spend').toString(),
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.red,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total Earning",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total spending",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromMonthly('spend').toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.red,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        getDataFromMonthly('earn').toString(),
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.green,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Earning",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromMonthly('earn').toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        (getDataFromMonthly('earn')-getDataFromMonthly('spend')).toString(),
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.green,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            (getDataFromMonthly('earn')-getDataFromMonthly('spend')).toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-        Card(
-          margin: EdgeInsets.all(20),
-          color: mColors.primaryDarkColor,
-          child: Container(
-            padding: EdgeInsets.all(15),
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.height * 0.35,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Overall",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: 'Righteous',
-                    color: mColors.secondaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total spending",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+            Card(
+              margin: EdgeInsets.all(20),
+              color: mColors.primaryDarkColor,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.35,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Overall",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Righteous',
+                        color: mColors.secondaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        getDataFromYearly('spend').toString() + " Rs",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.red,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total Earning",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total spending",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromYearly('spend').toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.red,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        getDataFromYearly('earn').toString() + " Rs",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.green,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Total",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: mColors.secondaryColor,
-                        ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Earning",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromYearly('earn').toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        (getDataFromYearly('earn') - getDataFromYearly('spend')).toString() + " Rs",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.green,
-                          fontFamily: 'Righteous',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            (getDataFromYearly('earn') - getDataFromYearly('spend')).toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
-    ));
+          ],
+        ));
   }
+  Widget landscapeWidget(){
+    return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Card(
+              margin: EdgeInsets.all(20),
+              color: mColors.primaryDarkColor,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                width: isPortrait(context)? MediaQuery.of(context).size.width*0.9 : MediaQuery.of(context).size.width*0.4,
+                height: isPortrait(context)? MediaQuery.of(context).size.height*0.35 : MediaQuery.of(context).size.height*0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Monthly",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Righteous',
+                        color: mColors.secondaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total spending",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromMonthly('spend').toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.red,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Earning",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromMonthly('earn').toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            (getDataFromMonthly('earn')-getDataFromMonthly('spend')).toString(),
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(20),
+              color: mColors.primaryDarkColor,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                width: isPortrait(context)? MediaQuery.of(context).size.width*0.9 : MediaQuery.of(context).size.width*0.4,
+                height: isPortrait(context)? MediaQuery.of(context).size.height*0.35 : MediaQuery.of(context).size.height*0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Overall",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontFamily: 'Righteous',
+                        color: mColors.secondaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total spending",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromYearly('spend').toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.red,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Earning",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            getDataFromYearly('earn').toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mColors.secondaryColor,
+                            ),
+                          ),
+                          Text(
+                            (getDataFromYearly('earn') - getDataFromYearly('spend')).toString() + " Rs",
+                            style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.green,
+                              fontFamily: 'Righteous',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
+
+
+
+
    Future<DocumentSnapshot> monthlyData() async{
     DocumentSnapshot d =   await FirebaseFirestore.instance
         .collection("users")
@@ -277,4 +480,11 @@ class _SummaryPageState extends State<SummaryPage> {
       return 0;
     }
   }
+  static bool isPortrait(context) {
+    if(MediaQuery.of(context).orientation == Orientation.portrait){
+      return true;
+    }
+    return false;
+  }
+
 }

@@ -22,7 +22,7 @@ class TransactionWidget extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.centerRight,
-                width: MediaQuery.of(context).size.width*0.3,
+                width: isPortrait(context)? MediaQuery.of(context).size.width*0.3 : MediaQuery.of(context).size.width*0.15,
                 margin: EdgeInsets.all(10),
                 child: Container(
                   padding: EdgeInsets.all(10),
@@ -40,7 +40,7 @@ class TransactionWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width*0.40,
+                width: isPortrait(context)? MediaQuery.of(context).size.width*0.40 : MediaQuery.of(context).size.width*0.20,
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -70,4 +70,10 @@ class TransactionWidget extends StatelessWidget {
     collectionReference.doc(id).delete();
     UpdatePocket.deleteTransaction(documentSnapshot);
     }
+  static bool isPortrait(context) {
+    if(MediaQuery.of(context).orientation == Orientation.portrait){
+      return true;
+    }
+    return false;
+  }
 }
