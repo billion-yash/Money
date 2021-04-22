@@ -239,7 +239,7 @@ class LoginPageState extends State<LoginPage> {
     return ListView(
       children: [
         Container(
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.fromLTRB(25 , 45 , 25 , 25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -323,7 +323,7 @@ class LoginPageState extends State<LoginPage> {
             "Beware of little expenses. A small leak will sink a great ship.",
             style: TextStyle(
                 fontFamily: 'Righteous',
-                fontSize: 35,
+                fontSize: 25,
                 color: Colors.white70,
                 letterSpacing: 4),
           ),
