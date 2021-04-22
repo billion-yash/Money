@@ -47,13 +47,10 @@ class LoadingScreen extends StatelessWidget {
                   size: 40.0,
                 ),
                 Container(
-                  child: Text(
-                    "YD",
-                    style: TextStyle(
-                        color: mColors.secondaryColor,
-                        fontSize: 25,
-                        letterSpacing: 7,
-                        fontWeight: FontWeight.bold),
+                  child: Image.asset(
+                    'assets/icon/my_logo.png',
+                    height: 60,
+                    width: 60,
                   ),
                   margin: EdgeInsets.all(15),
                 )
