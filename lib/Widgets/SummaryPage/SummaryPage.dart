@@ -475,7 +475,7 @@ class _SummaryPageState extends State<SummaryPage> {
   }
   int getDataFromYearly(String s) {
     try{
-      return monthly[s];
+      return yearly[s];
     }catch(error){
       return 0;
     }
