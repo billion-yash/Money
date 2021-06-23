@@ -109,14 +109,14 @@ class CurrentUser extends StatelessWidget {
             icon: Image.asset("assets/icon/my_logo.png",color: Colors.white70,),
               iconSize: 40,
               onPressed: () {
-                launch('https://money.yashdhanlobhe.tech/');
+                launch('https://money.yashdhanlobhe.website/');
               }
           ),
           IconButton(
               icon: Icon(Icons.web ,color: Colors.white70,),
               iconSize: 40,
               onPressed: () {
-                launch('https://yashdhanlobhe.tech/');
+                launch('https://yashdhanlobhe.website/');
               }
           ),
         ],
