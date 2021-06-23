@@ -32,7 +32,7 @@ Android
 - small size app
 - simple basic UI 
 - open source
-- website also available for PC at https://money.yashdhanlobhe.tech/
+- website also available for PC at https://money.yashdhanlobhe.website/
 - secure login system
 - can login from any device with a phone number
 - monthly analysis of your expenses
