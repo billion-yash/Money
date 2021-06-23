@@ -116,7 +116,7 @@ class CurrentUser extends StatelessWidget {
               icon: Icon(Icons.web ,color: Colors.white70,),
               iconSize: 40,
               onPressed: () {
-                launch('https://yashdhanlobhe.website/');
+                launch('https://yashdhanlobhe.website/' );
               }
           ),
         ],
