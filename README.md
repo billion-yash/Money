@@ -3,7 +3,7 @@
 </p>
 
 # Money Expense App
-Money Expense App to store your expenses and earnings on the cloud. This app has a simple and user-friendly UI, We also have a web app for this app at https://money.yashdhanlobhe.tech/
+Money Expense App to store your expenses and earnings on the cloud. This app has a simple and user-friendly UI, We also have a web app for this app at https://money.yashdhanlobhe.website/
   
 Webapp
 -----
